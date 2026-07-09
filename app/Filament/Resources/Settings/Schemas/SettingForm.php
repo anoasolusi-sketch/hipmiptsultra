@@ -12,10 +12,12 @@ class SettingForm
     {
         return $schema
             ->components([
-                TextInput::make('key')
-                    ->required(),
-                Textarea::make('value')
-                    ->columnSpanFull(),
+                TextInput::make('address')->label('Alamat')->columnSpanFull(),
+                TextInput::make('email')->email()->label('Email'),
+                TextInput::make('phone')->label('Telepon'),
+                TextInput::make('instagram')->label('Instagram URL')->url(),
+                TextInput::make('facebook')->label('Facebook URL')->url(),
+                TextInput::make('youtube')->label('YouTube URL')->url(),
             ]);
     }
 }

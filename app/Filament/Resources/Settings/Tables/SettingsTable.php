@@ -14,12 +14,10 @@ class SettingsTable
     {
         return $table
             ->columns([
-                TextColumn::make('key')
+                TextColumn::make('email')
                     ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('phone')
+                    ->searchable(),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()

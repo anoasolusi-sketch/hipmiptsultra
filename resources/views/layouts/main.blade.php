@@ -26,7 +26,11 @@
     <meta property="twitter:title" content="@yield('title', 'HIPMI PT SULTRA - Pengusaha Muda Kampus Sulawesi Tenggara')">
     <meta property="twitter:description" content="@yield('meta_description', 'Himpunan Pengusaha Muda Indonesia Perguruan Tinggi (HIPMI PT) Sulawesi Tenggara. Wadah independen pencetak pengusaha mahasiswa berdaya saing nasional.')">
     <meta property="twitter:image" content="{{ asset('images/logohipmi.png') }}">
-    <link rel="icon" href="{{ asset('images/logohipmi.png') }}" type="image/png">
+    
+    <!-- Standard Favicons for Google Search -->
+    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.png') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>

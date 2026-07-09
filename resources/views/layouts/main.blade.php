@@ -178,7 +178,7 @@
             <div class="pt-6 md:pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-[0.65rem] md:text-xs text-gray-500 uppercase tracking-widest text-center md:text-left">
                     &copy; {{ date('Y') }} HIPMI PT SULTRA. Hak Cipta Dilindungi.<br>
-                    <span class="mt-1 block normal-case font-medium text-gray-400">Dibuat oleh <a href="https://anoadev.tech" target="_blank" class="text-hipmiBlue hover:text-blue-900 transition-colors">anoadev</a></span>
+                    <span class="mt-1 block normal-case font-medium text-gray-400">Built by <a href="https://anoadev.tech" target="_blank" class="text-hipmiBlue hover:text-blue-900 transition-colors">anoadev</a></span>
                 </p>
                 <div class="flex space-x-4">
                     @if(isset($site_setting->instagram) && $site_setting->instagram)

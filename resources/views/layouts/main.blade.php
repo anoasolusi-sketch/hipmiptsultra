@@ -2,8 +2,31 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'HIPMI PT SULTRA')</title>
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>@yield('title', 'HIPMI PT SULTRA - Pengusaha Muda Kampus Sulawesi Tenggara')</title>
+    <meta name="title" content="@yield('title', 'HIPMI PT SULTRA - Pengusaha Muda Kampus Sulawesi Tenggara')">
+    <meta name="description" content="@yield('meta_description', 'Himpunan Pengusaha Muda Indonesia Perguruan Tinggi (HIPMI PT) Sulawesi Tenggara. Wadah independen pencetak pengusaha mahasiswa berdaya saing nasional.')">
+    <meta name="keywords" content="HIPMI, HIPMI PT, SULTRA, Sulawesi Tenggara, Pengusaha Muda, Mahasiswa Pengusaha, Bisnis Kampus, Inkubator Bisnis Sultra, Organisasi Pengusaha">
+    <meta name="author" content="HIPMI PT SULTRA">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="@yield('title', 'HIPMI PT SULTRA - Pengusaha Muda Kampus Sulawesi Tenggara')">
+    <meta property="og:description" content="@yield('meta_description', 'Himpunan Pengusaha Muda Indonesia Perguruan Tinggi (HIPMI PT) Sulawesi Tenggara. Wadah independen pencetak pengusaha mahasiswa berdaya saing nasional.')">
+    <meta property="og:image" content="{{ asset('images/logohipmi.png') }}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ url()->current() }}">
+    <meta property="twitter:title" content="@yield('title', 'HIPMI PT SULTRA - Pengusaha Muda Kampus Sulawesi Tenggara')">
+    <meta property="twitter:description" content="@yield('meta_description', 'Himpunan Pengusaha Muda Indonesia Perguruan Tinggi (HIPMI PT) Sulawesi Tenggara. Wadah independen pencetak pengusaha mahasiswa berdaya saing nasional.')">
+    <meta property="twitter:image" content="{{ asset('images/logohipmi.png') }}">
     <link rel="icon" href="{{ asset('images/logohipmi.png') }}" type="image/png">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">

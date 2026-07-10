@@ -28,7 +28,9 @@
                         <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded font-semibold mt-1">{{ $incubator->category ?? 'Umum' }}</span>
                     </div>
                 </div>
-                <p class="text-gray-600 line-clamp-4">{{ $incubator->description }}</p>
+                <div class="prose prose-sm max-w-none text-gray-600 line-clamp-4">
+                    {!! $incubator->description !!}
+                </div>
                 <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
                     <span class="text-sm font-medium {{ $incubator->status === 'active' ? 'text-green-600' : 'text-gray-500' }}">
                         {{ ucfirst($incubator->status) }}

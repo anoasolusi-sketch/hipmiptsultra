@@ -23,7 +23,7 @@
                     <button class="bg-hipmiBlue text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-800 transition">Daftar Sekarang</button>
                 </div>
                 <div class="prose max-w-none text-gray-600 mt-4">
-                    {!! nl2br(e($recruitment->description)) !!}
+                    {!! $recruitment->description !!}
                 </div>
             </div>
             @empty

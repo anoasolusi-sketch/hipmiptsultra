@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\Articles\Schemas;
 
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 
@@ -15,7 +15,7 @@ class ArticleForm
             ->components([
                 TextInput::make('title')
                     ->required(),
-                Textarea::make('content')
+                RichEditor::make('content')
                     ->columnSpanFull(),
                 TextInput::make('thumbnail'),
                 Toggle::make('is_published')

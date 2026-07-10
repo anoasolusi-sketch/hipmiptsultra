@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\Incubators\Schemas;
 
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\RichEditor;
 use Filament\Schemas\Schema;
 
 class IncubatorForm
@@ -15,7 +15,7 @@ class IncubatorForm
                 TextInput::make('name')
                     ->required(),
                 TextInput::make('category'),
-                Textarea::make('description')
+                RichEditor::make('description')
                     ->columnSpanFull(),
                 TextInput::make('logo'),
                 TextInput::make('status')

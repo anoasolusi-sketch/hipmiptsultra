@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\Recruitments\Schemas;
 
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 
@@ -15,7 +15,7 @@ class RecruitmentForm
             ->components([
                 TextInput::make('position')
                     ->required(),
-                Textarea::make('description')
+                RichEditor::make('description')
                     ->columnSpanFull(),
                 Toggle::make('is_open')
                     ->required(),

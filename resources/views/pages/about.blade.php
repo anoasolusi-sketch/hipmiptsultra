@@ -20,7 +20,7 @@
         @endif
 
         <div class="prose prose-lg prose-blue max-w-none mb-20 text-gray-700 leading-relaxed">
-            {!! $about ? nl2br(e($about->content)) : 'Konten tentang kami belum tersedia.' !!}
+            {!! $about ? $about->content : 'Konten tentang kami belum tersedia.' !!}
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 border-t-4 border-gray-900 pt-12">
@@ -28,16 +28,16 @@
                 <h2 class="text-3xl font-extrabold text-gray-900 mb-6 flex items-center">
                     <span class="w-6 h-6 bg-hipmiBlue mr-4 block"></span> Visi
                 </h2>
-                <div class="text-gray-600 leading-relaxed text-lg">
-                    {!! $about ? nl2br(e($about->vision)) : 'Visi belum ditentukan.' !!}
+                <div class="prose prose-lg prose-blue text-gray-600 leading-relaxed text-lg max-w-none">
+                    {!! $about ? $about->vision : 'Visi belum ditentukan.' !!}
                 </div>
             </div>
             <div>
                 <h2 class="text-3xl font-extrabold text-gray-900 mb-6 flex items-center">
                     <span class="w-6 h-6 bg-hipmiYellow mr-4 block"></span> Misi
                 </h2>
-                <div class="text-gray-600 leading-relaxed text-lg">
-                    {!! $about ? nl2br(e($about->mission)) : 'Misi belum ditentukan.' !!}
+                <div class="prose prose-lg prose-yellow text-gray-600 leading-relaxed text-lg max-w-none">
+                    {!! $about ? $about->mission : 'Misi belum ditentukan.' !!}
                 </div>
             </div>
         </div>

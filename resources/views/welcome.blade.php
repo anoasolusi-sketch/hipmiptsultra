@@ -57,7 +57,7 @@
                         {{ $about->title ?? 'Tentang Kami' }}
                     </h2>
                     <div class="text-lg text-gray-600 leading-relaxed mb-10 border-l-2 border-hipmiBlue pl-6">
-                        {!! nl2br(e(Str::limit($about->content ?? '', 300))) !!}
+                        {{ Str::limit(strip_tags($about->content ?? ''), 300) }}
                     </div>
                     <a href="{{ route('about') }}" class="inline-flex items-center text-hipmiBlue font-bold uppercase tracking-widest text-sm border-b-2 border-hipmiBlue pb-1 hover:text-blue-900 hover:border-blue-900 transition-all group">
                         Selengkapnya <span class="ml-2 transform group-hover:translate-x-1 transition-transform">&rarr;</span>

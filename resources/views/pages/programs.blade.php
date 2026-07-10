@@ -24,7 +24,9 @@
                 </div>
                 <div class="p-6">
                     <h3 class="text-2xl font-bold text-gray-900 mb-4">{{ $program->title }}</h3>
-                    <p class="text-gray-600">{{ $program->description }}</p>
+                    <div class="prose prose-sm max-w-none text-gray-600">
+                        {!! $program->description !!}
+                    </div>
                 </div>
             </div>
             @empty

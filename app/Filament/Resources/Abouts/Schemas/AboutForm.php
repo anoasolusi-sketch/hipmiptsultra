@@ -4,7 +4,7 @@ namespace App\Filament\Resources\Abouts\Schemas;
 
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\RichEditor;
 use Filament\Schemas\Schema;
 
 class AboutForm
@@ -14,11 +14,11 @@ class AboutForm
         return $schema
             ->components([
                 TextInput::make('title'),
-                Textarea::make('content')
+                RichEditor::make('content')
                     ->columnSpanFull(),
-                Textarea::make('vision')
+                RichEditor::make('vision')
                     ->columnSpanFull(),
-                Textarea::make('mission')
+                RichEditor::make('mission')
                     ->columnSpanFull(),
                 FileUpload::make('image')
                     ->image(),

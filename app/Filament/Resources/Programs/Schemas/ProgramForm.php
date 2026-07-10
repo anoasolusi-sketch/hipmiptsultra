@@ -4,7 +4,7 @@ namespace App\Filament\Resources\Programs\Schemas;
 
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\RichEditor;
 use Filament\Schemas\Schema;
 
 class ProgramForm
@@ -15,7 +15,7 @@ class ProgramForm
             ->components([
                 TextInput::make('title')
                     ->required(),
-                Textarea::make('description')
+                RichEditor::make('description')
                     ->columnSpanFull(),
                 FileUpload::make('image')
                     ->image(),

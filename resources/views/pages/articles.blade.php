@@ -16,8 +16,8 @@
             @forelse($articles as $article)
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition">
                 <div class="h-48 bg-gray-200 flex items-center justify-center">
-                    @if($article->thumbnail)
-                        <img src="{{ Storage::url($article->thumbnail) }}" class="object-cover h-full w-full" alt="{{ $article->title }}">
+                    @if($article->cover_image)
+                        <img src="{{ $article->cover_image }}" class="object-cover h-full w-full" alt="{{ $article->title }}">
                     @else
                         <span class="text-gray-400">Tanpa Gambar</span>
                     @endif

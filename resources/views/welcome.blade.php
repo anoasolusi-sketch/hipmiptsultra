@@ -131,9 +131,9 @@
             <div class="group border border-gray-200 p-6 flex flex-col h-full bg-white hover:bg-gray-50 transition-colors">
                 <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">{{ $article->created_at->format('d M Y') }}</p>
                 
-                @if($article->thumbnail)
+                @if($article->cover_image)
                 <div class="aspect-video w-full overflow-hidden mb-6 bg-gray-100 border border-gray-100">
-                    <img src="{{ Storage::url($article->thumbnail) }}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="{{ $article->title }}">
+                    <img src="{{ $article->cover_image }}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="{{ $article->title }}">
                 </div>
                 @endif
                 

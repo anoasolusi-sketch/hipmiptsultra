@@ -60,6 +60,12 @@ class PageController extends Controller
         return view('pages.articles', compact('articles'));
     }
 
+    public function articleDetail($id)
+    {
+        $article = Article::where('is_published', true)->findOrFail($id);
+        return view('pages.articles_show', compact('article'));
+    }
+
     public function contact()
     {
         return view('pages.contact');

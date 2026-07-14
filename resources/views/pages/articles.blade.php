@@ -24,9 +24,11 @@
                 </div>
                 <div class="p-6">
                     <p class="text-sm text-hipmiBlue font-semibold mb-2">{{ $article->created_at->format('d M Y') }}</p>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2">{{ $article->title }}</h3>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 leading-snug hover:text-hipmiBlue transition">
+                        <a href="{{ route('articles.show', $article->id) }}">{{ $article->title }}</a>
+                    </h3>
                     <p class="text-gray-600 line-clamp-3 mb-4">{{ Str::limit(strip_tags($article->content), 120) }}</p>
-                    <a href="#" class="text-hipmiYellow font-semibold hover:text-yellow-600">Baca Selengkapnya &rarr;</a>
+                    <a href="{{ route('articles.show', $article->id) }}" class="text-hipmiYellow font-semibold hover:text-yellow-600">Baca Selengkapnya &rarr;</a>
                 </div>
             </div>
             @empty

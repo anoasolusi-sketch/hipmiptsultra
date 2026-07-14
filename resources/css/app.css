@@ -5,3 +5,7 @@
   --color-hipmiBlue: #002B5B;
   --color-hipmiYellow: #F1C40F;
 }
+
+.prose p {
+  text-align: justify;
+}

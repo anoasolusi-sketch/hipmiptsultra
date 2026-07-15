@@ -17,7 +17,12 @@ class PageController extends Controller
         $programs = \App\Models\Program::latest()->take(3)->get();
         $articles = \App\Models\Article::where('is_published', true)->latest()->take(3)->get();
         $galleries = \App\Models\Gallery::latest()->take(8)->get();
-        return view('welcome', compact('about', 'programs', 'articles', 'galleries'));
+        $agendas = \App\Models\Agenda::where('is_active', true)
+                        ->whereMonth('date', date('m'))
+                        ->whereYear('date', date('Y'))
+                        ->orderBy('date', 'asc')
+                        ->get();
+        return view('welcome', compact('about', 'programs', 'articles', 'galleries', 'agendas'));
     }
 
     public function about()

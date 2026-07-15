@@ -187,4 +187,132 @@
         
     </div>
 </div>
+
+<!-- Agenda Calendar Section -->
+<div class="bg-white py-20 md:py-32 border-t border-gray-200">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-end border-b-2 border-gray-900 pb-8 mb-12">
+            <div>
+                <p class="text-sm font-bold text-gray-500 tracking-widest uppercase mb-2">Jadwal & Agenda</p>
+                <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight">Agenda Kegiatan</h2>
+            </div>
+        </div>
+
+        <div x-data="calendarData()" class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+            <!-- Calendar Grid -->
+            <div>
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900" x-text="monthName + ' ' + year"></h3>
+                </div>
+                <div class="grid grid-cols-7 gap-2 mb-4">
+                    <template x-for="day in ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min']">
+                        <div class="text-center font-bold text-xs uppercase tracking-widest text-gray-400" x-text="day"></div>
+                    </template>
+                </div>
+                <div class="grid grid-cols-7 gap-2">
+                    <template x-for="blank in blankDays">
+                        <div class="aspect-square p-2 border border-transparent"></div>
+                    </template>
+                    <template x-for="date in daysInMonth">
+                        <div 
+                            @click="selectDate(date)"
+                            class="aspect-square p-2 border cursor-pointer flex flex-col justify-between hover:border-hipmiBlue transition-colors group relative"
+                            :class="{
+                                'border-hipmiBlue bg-blue-50': isSelected(date),
+                                'border-gray-200': !isSelected(date),
+                                'bg-gray-50': isToday(date) && !isSelected(date)
+                            }"
+                        >
+                            <span class="text-sm font-bold" :class="{'text-hipmiBlue': isSelected(date) || hasEvent(date), 'text-gray-900': !isSelected(date) && !hasEvent(date)}" x-text="date"></span>
+                            
+                            <!-- Fire Icon -->
+                            <div x-show="hasEvent(date)" class="text-hipmiYellow self-end" title="Ada Agenda">
+                                <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C12 2 8 6.5 8 11c0 2.2 1.3 4.1 3.2 4.8-.2-1.3.4-2.6 1.3-3.5C12 12 12 10 12 10s1.5 1 2 2.5c.5 1.5.1 3.2-.8 4.5 1.5-.7 2.8-2.2 2.8-4 0-4.5-4-9-4-9z"/></svg>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Event Details -->
+            <div class="bg-gray-50 p-8 border border-gray-200">
+                <h4 class="text-xl font-bold text-gray-900 mb-6 border-b border-gray-200 pb-4">
+                    Agenda <span x-text="selectedDateText"></span>
+                </h4>
+                
+                <div x-show="selectedEvents.length === 0" class="text-gray-500 py-12 text-center">
+                    Tidak ada agenda pada tanggal ini.
+                </div>
+
+                <div x-show="selectedEvents.length > 0" class="space-y-6">
+                    <template x-for="event in selectedEvents" :key="event.id">
+                        <div class="bg-white p-6 border border-gray-200 hover:border-hipmiYellow transition-colors group">
+                            <div class="flex justify-between items-start mb-2">
+                                <h5 class="font-bold text-lg text-gray-900 group-hover:text-hipmiBlue transition-colors" x-text="event.title"></h5>
+                                <span class="px-3 py-1 bg-blue-100 text-hipmiBlue text-xs font-bold rounded-full" x-show="event.time" x-text="event.time"></span>
+                            </div>
+                            <div class="flex items-center text-xs text-gray-500 mb-4" x-show="event.location">
+                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                <span x-text="event.location"></span>
+                            </div>
+                            <p class="text-sm text-gray-600 leading-relaxed" x-text="event.description"></p>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('alpine:init', () => {
+    Alpine.data('calendarData', () => ({
+        month: new Date().getMonth(),
+        year: new Date().getFullYear(),
+        today: new Date(),
+        selectedDate: new Date().getDate(),
+        events: @json($agendas),
+        
+        get monthName() {
+            const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            return months[this.month];
+        },
+        
+        get daysInMonth() {
+            return new Date(this.year, this.month + 1, 0).getDate();
+        },
+        
+        get blankDays() {
+            let dayOfWeek = new Date(this.year, this.month, 1).getDay();
+            return dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+        },
+        
+        get selectedDateText() {
+            return `${this.selectedDate} ${this.monthName} ${this.year}`;
+        },
+        
+        get selectedEvents() {
+            const selectedDateString = `${this.year}-${String(this.month + 1).padStart(2, '0')}-${String(this.selectedDate).padStart(2, '0')}`;
+            return this.events.filter(e => e.date.substring(0, 10) === selectedDateString);
+        },
+        
+        selectDate(date) {
+            this.selectedDate = date;
+        },
+        
+        isSelected(date) {
+            return this.selectedDate === date;
+        },
+        
+        isToday(date) {
+            return this.today.getDate() === date && this.today.getMonth() === this.month && this.today.getFullYear() === this.year;
+        },
+        
+        hasEvent(date) {
+            const dateString = `${this.year}-${String(this.month + 1).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+            return this.events.some(e => e.date.substring(0, 10) === dateString);
+        }
+    }));
+});
+</script>
 @endsection

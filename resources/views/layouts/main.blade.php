@@ -40,6 +40,7 @@
             color: #111827; /* gray-900 */
         }
     </style>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="antialiased flex flex-col min-h-screen selection:bg-hipmiYellow selection:text-hipmiBlue">
     @php $site_setting = \App\Models\Setting::first(); @endphp

@@ -194,7 +194,7 @@
         
         <div class="flex flex-col md:flex-row justify-between items-end border-b border-gray-300 pb-6 mb-12">
             <h2 class="text-3xl md:text-4xl font-extrabold text-[#001736] tracking-tight">Kalender Event Terdekat</h2>
-            <a href="#" class="mt-4 md:mt-0 text-orange-500 font-bold uppercase tracking-widest text-sm flex items-center hover:text-orange-600 transition-colors">
+            <a href="{{ route('agendas.index') }}" class="mt-4 md:mt-0 text-orange-500 font-bold uppercase tracking-widest text-sm flex items-center hover:text-orange-600 transition-colors">
                 Seluruh Agenda <span class="ml-2">&rarr;</span>
             </a>
         </div>

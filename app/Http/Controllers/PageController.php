@@ -74,4 +74,13 @@ class PageController extends Controller
     {
         return view('pages.contact');
     }
+
+    public function agendas()
+    {
+        $about = \App\Models\About::first();
+        $agendas = \App\Models\Agenda::where('is_active', true)
+                        ->orderBy('date', 'asc')
+                        ->paginate(12);
+        return view('pages.agendas', compact('agendas', 'about'));
+    }
 }

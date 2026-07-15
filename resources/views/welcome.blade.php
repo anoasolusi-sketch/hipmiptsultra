@@ -189,75 +189,114 @@
 </div>
 
 <!-- Agenda Calendar Section -->
-<div class="bg-white py-20 md:py-32 border-t border-gray-200">
+<div class="bg-gray-50 py-20 md:py-32 border-t border-gray-200" id="agenda">
     <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row justify-between items-end border-b-2 border-gray-900 pb-8 mb-12">
-            <div>
-                <p class="text-sm font-bold text-gray-500 tracking-widest uppercase mb-2">Jadwal & Agenda</p>
-                <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight">Agenda Kegiatan</h2>
-            </div>
+        
+        <div class="flex flex-col md:flex-row justify-between items-end border-b border-gray-300 pb-6 mb-12">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-[#001736] tracking-tight">Kalender Event Terdekat</h2>
+            <a href="#" class="mt-4 md:mt-0 text-orange-500 font-bold uppercase tracking-widest text-sm flex items-center hover:text-orange-600 transition-colors">
+                Seluruh Agenda <span class="ml-2">&rarr;</span>
+            </a>
         </div>
 
-        <div x-data="calendarData()" class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
-            <!-- Calendar Grid -->
-            <div>
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-gray-900" x-text="monthName + ' ' + year"></h3>
+        <div x-data="calendarData()" class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            
+            <!-- Calendar Widget (Left) -->
+            <div class="lg:col-span-1 bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] p-8 border border-gray-100">
+                
+                <!-- Month Navigation -->
+                <div class="flex justify-between items-center mb-8 px-2">
+                    <button @click="prevMonth()" class="text-gray-400 hover:text-gray-900 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <h3 class="text-lg font-bold text-[#001736] tracking-widest uppercase" x-text="monthName + ' ' + year"></h3>
+                    <button @click="nextMonth()" class="text-gray-400 hover:text-gray-900 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
                 </div>
-                <div class="grid grid-cols-7 gap-2 mb-4">
+                
+                <!-- Days Header -->
+                <div class="grid grid-cols-7 gap-1 mb-4">
                     <template x-for="day in ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min']">
-                        <div class="text-center font-bold text-xs uppercase tracking-widest text-gray-400" x-text="day"></div>
+                        <div class="text-center font-bold text-xs uppercase tracking-widest text-[#7C8B9D]" x-text="day"></div>
                     </template>
                 </div>
-                <div class="grid grid-cols-7 gap-2">
+                
+                <!-- Dates Grid -->
+                <div class="grid grid-cols-7 gap-y-4 gap-x-1 mb-8">
                     <template x-for="blank in blankDays">
-                        <div class="aspect-square p-2 border border-transparent"></div>
+                        <div class="aspect-square"></div>
                     </template>
                     <template x-for="date in daysInMonth">
-                        <div 
-                            @click="selectDate(date)"
-                            class="aspect-square p-2 border cursor-pointer flex flex-col justify-between hover:border-hipmiBlue transition-colors group relative"
-                            :class="{
-                                'border-hipmiBlue bg-blue-50': isSelected(date),
-                                'border-gray-200': !isSelected(date),
-                                'bg-gray-50': isToday(date) && !isSelected(date)
-                            }"
-                        >
-                            <span class="text-sm font-bold" :class="{'text-hipmiBlue': isSelected(date) || hasEvent(date), 'text-gray-900': !isSelected(date) && !hasEvent(date)}" x-text="date"></span>
-                            
-                            <!-- Fire Icon -->
-                            <div x-show="hasEvent(date)" class="text-hipmiYellow self-end" title="Ada Agenda">
-                                <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C12 2 8 6.5 8 11c0 2.2 1.3 4.1 3.2 4.8-.2-1.3.4-2.6 1.3-3.5C12 12 12 10 12 10s1.5 1 2 2.5c.5 1.5.1 3.2-.8 4.5 1.5-.7 2.8-2.2 2.8-4 0-4.5-4-9-4-9z"/></svg>
+                        <div class="relative flex justify-center items-center">
+                            <button 
+                                @click="selectDate(date)"
+                                class="w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-200 font-medium text-sm"
+                                :class="{
+                                    'border-2 border-orange-400 text-gray-900 bg-white font-bold': isSelected(date),
+                                    'border-2 border-orange-400 text-gray-900 bg-white': isToday(date) && !isSelected(date),
+                                    'text-[#3B4C68] hover:bg-gray-100 border-2 border-transparent': !isSelected(date) && !isToday(date)
+                                }"
+                            >
+                                <span x-text="date"></span>
+                            </button>
+                            <!-- Fire Icon Indicator -->
+                            <div x-show="hasEvent(date)" class="absolute -top-1 -right-0.5 text-[0.65rem]" title="Ada Agenda">
+                                🔥
                             </div>
                         </div>
                     </template>
+                </div>
+                
+                <!-- Legend -->
+                <div class="flex items-center justify-center gap-6 text-xs font-medium text-gray-500 pt-6 border-t border-gray-100">
+                    <div class="flex items-center gap-2">
+                        <span>🔥</span> Ada Event
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-4 rounded-full border-2 border-orange-400"></div> Hari Ini
+                    </div>
                 </div>
             </div>
 
-            <!-- Event Details -->
-            <div class="bg-gray-50 p-8 border border-gray-200">
-                <h4 class="text-xl font-bold text-gray-900 mb-6 border-b border-gray-200 pb-4">
-                    Agenda <span x-text="selectedDateText"></span>
-                </h4>
-                
-                <div x-show="selectedEvents.length === 0" class="text-gray-500 py-12 text-center">
-                    Tidak ada agenda pada tanggal ini.
+            <!-- Event Details (Right) -->
+            <div class="lg:col-span-2">
+                <!-- Empty State -->
+                <div x-show="!selectedDate || selectedEvents.length === 0" class="border-2 border-dashed border-gray-300 rounded-xl bg-white p-12 min-h-[420px] flex flex-col items-center justify-center text-center transition-all">
+                    <div class="w-16 h-16 text-gray-300 mb-6">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-extrabold text-gray-900 mb-3">Silakan Pilih Tanggal</h4>
+                    <p class="text-gray-500">Pilih tanggal di kalender untuk melihat daftar agenda.</p>
                 </div>
 
-                <div x-show="selectedEvents.length > 0" class="space-y-6">
-                    <template x-for="event in selectedEvents" :key="event.id">
-                        <div class="bg-white p-6 border border-gray-200 hover:border-hipmiYellow transition-colors group">
-                            <div class="flex justify-between items-start mb-2">
-                                <h5 class="font-bold text-lg text-gray-900 group-hover:text-hipmiBlue transition-colors" x-text="event.title"></h5>
-                                <span class="px-3 py-1 bg-blue-100 text-hipmiBlue text-xs font-bold rounded-full" x-show="event.time" x-text="event.time"></span>
+                <!-- Event List State -->
+                <div x-show="selectedDate && selectedEvents.length > 0" class="bg-white border border-gray-200 shadow-sm rounded-xl p-8 lg:p-12 min-h-[420px]" style="display: none;">
+                    <div class="flex items-center gap-3 mb-8 pb-6 border-b border-gray-100">
+                        <span class="text-2xl">🔥</span>
+                        <h4 class="text-2xl font-extrabold text-[#001736]">
+                            Agenda <span x-text="selectedDateText" class="text-orange-500"></span>
+                        </h4>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <template x-for="event in selectedEvents" :key="event.id">
+                            <div class="flex flex-col md:flex-row gap-6 p-6 rounded-xl border border-gray-100 bg-gray-50 hover:bg-white hover:shadow-md hover:border-gray-200 transition-all group">
+                                <div class="flex flex-col min-w-[120px]">
+                                    <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">WAKTU</span>
+                                    <span class="text-lg font-extrabold text-orange-500" x-text="event.time ? event.time : 'Seharian'"></span>
+                                </div>
+                                <div class="flex-grow">
+                                    <h5 class="font-bold text-xl text-gray-900 group-hover:text-hipmiBlue transition-colors mb-3" x-text="event.title"></h5>
+                                    <div class="flex items-center text-sm text-gray-600 mb-4" x-show="event.location">
+                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                        <span x-text="event.location"></span>
+                                    </div>
+                                    <p class="text-gray-600 leading-relaxed text-sm" x-text="event.description"></p>
+                                </div>
                             </div>
-                            <div class="flex items-center text-xs text-gray-500 mb-4" x-show="event.location">
-                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                <span x-text="event.location"></span>
-                            </div>
-                            <p class="text-sm text-gray-600 leading-relaxed" x-text="event.description"></p>
-                        </div>
-                    </template>
+                        </template>
+                    </div>
                 </div>
             </div>
         </div>
@@ -270,11 +309,11 @@ document.addEventListener('alpine:init', () => {
         month: new Date().getMonth(),
         year: new Date().getFullYear(),
         today: new Date(),
-        selectedDate: new Date().getDate(),
+        selectedDate: null,
         events: @json($agendas),
         
         get monthName() {
-            const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            const months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
             return months[this.month];
         },
         
@@ -288,10 +327,13 @@ document.addEventListener('alpine:init', () => {
         },
         
         get selectedDateText() {
-            return `${this.selectedDate} ${this.monthName} ${this.year}`;
+            if(!this.selectedDate) return '';
+            const monthsIndo = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            return `${this.selectedDate} ${monthsIndo[this.month]} ${this.year}`;
         },
         
         get selectedEvents() {
+            if(!this.selectedDate) return [];
             const selectedDateString = `${this.year}-${String(this.month + 1).padStart(2, '0')}-${String(this.selectedDate).padStart(2, '0')}`;
             return this.events.filter(e => e.date.substring(0, 10) === selectedDateString);
         },
@@ -311,6 +353,26 @@ document.addEventListener('alpine:init', () => {
         hasEvent(date) {
             const dateString = `${this.year}-${String(this.month + 1).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
             return this.events.some(e => e.date.substring(0, 10) === dateString);
+        },
+        
+        nextMonth() {
+            if (this.month === 11) {
+                this.month = 0;
+                this.year++;
+            } else {
+                this.month++;
+            }
+            this.selectedDate = null;
+        },
+        
+        prevMonth() {
+            if (this.month === 0) {
+                this.month = 11;
+                this.year--;
+            } else {
+                this.month--;
+            }
+            this.selectedDate = null;
         }
     }));
 });

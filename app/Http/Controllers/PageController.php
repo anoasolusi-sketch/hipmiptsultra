@@ -18,8 +18,6 @@ class PageController extends Controller
         $articles = \App\Models\Article::where('is_published', true)->latest()->take(3)->get();
         $galleries = \App\Models\Gallery::latest()->take(8)->get();
         $agendas = \App\Models\Agenda::where('is_active', true)
-                        ->whereMonth('date', date('m'))
-                        ->whereYear('date', date('Y'))
                         ->orderBy('date', 'asc')
                         ->get();
         return view('welcome', compact('about', 'programs', 'articles', 'galleries', 'agendas'));

@@ -63,7 +63,8 @@ class PageController extends Controller
     public function articleDetail($id)
     {
         $article = Article::where('is_published', true)->findOrFail($id);
-        return view('pages.articles_show', compact('article'));
+        $latestArticles = Article::where('is_published', true)->where('id', '!=', $id)->latest()->take(5)->get();
+        return view('pages.articles_show', compact('article', 'latestArticles'));
     }
 
     public function contact()

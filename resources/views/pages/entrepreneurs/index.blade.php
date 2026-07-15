@@ -49,8 +49,13 @@
                     </div>
 
                     @if($entrepreneur->description)
-                    <div class="text-sm text-gray-700 bg-gray-50 p-3 rounded-lg mb-4 border border-gray-100">
-                        {{ $entrepreneur->description }}
+                    <div x-data="{ expanded: false }" class="text-sm text-gray-700 bg-gray-50 p-3 rounded-lg mb-4 border border-gray-100">
+                        <div :class="expanded ? '' : 'line-clamp-3'" class="transition-all duration-300">
+                            {{ $entrepreneur->description }}
+                        </div>
+                        <button @click="expanded = !expanded" class="text-hipmiBlue font-semibold text-xs mt-2 hover:underline focus:outline-none">
+                            <span x-text="expanded ? 'Tutup Deskripsi' : 'Baca Selengkapnya'"></span>
+                        </button>
                     </div>
                     @endif
                     

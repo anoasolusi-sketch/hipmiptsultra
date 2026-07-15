@@ -9,7 +9,10 @@ class EntrepreneurController extends Controller
 {
     public function index()
     {
-        $entrepreneurs = Entrepreneur::where('status', 'active')->latest()->get();
+        $entrepreneurs = Entrepreneur::where('status', 'active')
+                            ->orderBy('is_starred', 'desc')
+                            ->latest()
+                            ->get();
         return view('pages.entrepreneurs.index', compact('entrepreneurs'));
     }
 
@@ -27,6 +30,7 @@ class EntrepreneurController extends Controller
             'business_name' => 'required|string|max:255',
             'business_sector' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
+            'description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
         ], [
             'pin.in' => 'PIN Rahasia yang Anda masukkan salah.',

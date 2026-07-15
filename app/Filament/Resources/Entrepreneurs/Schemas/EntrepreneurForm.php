@@ -5,6 +5,8 @@ namespace App\Filament\Resources\Entrepreneurs\Schemas;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 
 class EntrepreneurForm
@@ -31,6 +33,10 @@ class EntrepreneurForm
                     ->options(['pending' => 'Pending', 'active' => 'Active', 'rejected' => 'Rejected'])
                     ->default('pending')
                     ->required(),
+                Textarea::make('description')
+                    ->columnSpanFull(),
+                Toggle::make('is_starred')
+                    ->label('Jadikan Unggulan (Bintang)'),
             ]);
     }
 }

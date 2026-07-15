@@ -19,12 +19,17 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @forelse($entrepreneurs as $entrepreneur)
-            <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-md transition">
-                <div class="h-48 bg-gray-200 flex items-center justify-center">
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm border {{ $entrepreneur->is_starred ? 'border-yellow-300 ring-2 ring-yellow-100' : 'border-gray-200' }} hover:shadow-md transition relative">
+                @if($entrepreneur->is_starred)
+                <div class="absolute top-4 right-4 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full shadow-sm z-10 flex items-center">
+                    ⭐ Unggulan
+                </div>
+                @endif
+                <div class="h-48 bg-gray-100 flex items-center justify-center relative">
                     @if($entrepreneur->image)
                         <img src="{{ Storage::url($entrepreneur->image) }}" class="object-cover h-full w-full" alt="{{ $entrepreneur->business_name }}">
                     @else
-                        <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        <img src="{{ asset('images/logohipmi.png') }}" class="object-contain h-24 w-24 opacity-30 grayscale" alt="Logo HIPMI PT">
                     @endif
                 </div>
                 <div class="p-6">
@@ -37,6 +42,12 @@
                     <div class="text-sm text-gray-600 mb-4">
                         <strong>Kampus:</strong> {{ $entrepreneur->campus }}
                     </div>
+
+                    @if($entrepreneur->description)
+                    <div class="text-sm text-gray-700 bg-gray-50 p-3 rounded-lg mb-4 border border-gray-100">
+                        {{ $entrepreneur->description }}
+                    </div>
+                    @endif
                     
                     <div class="border-t border-gray-100 pt-4 mt-2">
                         <a href="https://wa.me/{{ preg_replace('/^0/', '62', preg_replace('/[^0-9]/', '', $entrepreneur->phone)) }}" target="_blank" class="flex items-center justify-center text-green-600 hover:text-green-700 font-semibold transition-colors">

@@ -17,5 +17,7 @@ class Entrepreneur extends Model
         'phone',
         'image',
         'status',
+        'is_starred',
+        'description',
     ];
 }

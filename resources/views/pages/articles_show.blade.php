@@ -55,7 +55,7 @@
                             <div class="flex flex-col justify-center">
                                 <p class="text-[0.65rem] text-hipmiBlue font-bold uppercase tracking-widest mb-1">{{ $latest->created_at->format('d M Y') }}</p>
                                 <h4 class="font-bold text-gray-900 text-sm leading-snug group-hover:text-hipmiBlue transition-colors line-clamp-3">
-                                    <a href="{{ route('articles.show', $latest->id) }}" class="after:absolute after:inset-0">{{ $latest->title }}</a>
+                                    <a href="{{ route('articles.show', $latest->slug) }}" class="after:absolute after:inset-0">{{ $latest->title }}</a>
                                 </h4>
                             </div>
                         </div>

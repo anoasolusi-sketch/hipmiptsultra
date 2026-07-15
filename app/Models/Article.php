@@ -8,6 +8,17 @@ class Article extends Model
 {
     protected $guarded = [];
 
+    protected static function boot()
+    {
+        parent::boot();
+        
+        static::saving(function ($article) {
+            if (empty($article->slug)) {
+                $article->slug = \Illuminate\Support\Str::slug($article->title) . '-' . uniqid();
+            }
+        });
+    }
+
     public function getCoverImageAttribute()
     {
         if ($this->thumbnail) {

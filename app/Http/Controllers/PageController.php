@@ -63,10 +63,10 @@ class PageController extends Controller
         return view('pages.articles', compact('articles'));
     }
 
-    public function articleDetail($id)
+    public function articleDetail($slug)
     {
-        $article = Article::where('is_published', true)->findOrFail($id);
-        $latestArticles = Article::where('is_published', true)->where('id', '!=', $id)->latest()->take(5)->get();
+        $article = Article::where('is_published', true)->where('slug', $slug)->firstOrFail();
+        $latestArticles = Article::where('is_published', true)->where('id', '!=', $article->id)->latest()->take(5)->get();
         return view('pages.articles_show', compact('article', 'latestArticles'));
     }
 

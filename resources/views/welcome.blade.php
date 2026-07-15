@@ -138,12 +138,12 @@
                 @endif
                 
                 <h3 class="text-xl font-bold text-gray-900 mb-3 leading-snug group-hover:text-hipmiBlue transition-colors">
-                    <a href="{{ route('articles.show', $article->id) }}">{{ $article->title }}</a>
+                    <a href="{{ route('articles.show', $article->slug) }}">{{ $article->title }}</a>
                 </h3>
                 <p class="text-gray-600 leading-relaxed flex-grow">{{ Str::limit(strip_tags($article->content), 120) }}</p>
                 
                 <div class="mt-8 pt-6 border-t border-gray-200">
-                    <a href="{{ route('articles.show', $article->id) }}" class="inline-flex items-center text-hipmiBlue font-bold uppercase tracking-widest text-xs hover:text-blue-900 group">
+                    <a href="{{ route('articles.show', $article->slug) }}" class="inline-flex items-center text-hipmiBlue font-bold uppercase tracking-widest text-xs hover:text-blue-900 group">
                         Baca Selengkapnya <span class="ml-1 transform group-hover:translate-x-1 transition-transform">&rarr;</span>
                     </a>
                 </div>

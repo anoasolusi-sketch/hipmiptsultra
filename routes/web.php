@@ -9,7 +9,7 @@ Route::get('/program', [PageController::class, 'programs'])->name('programs');
 Route::get('/inkubator', [PageController::class, 'incubators'])->name('incubators');
 Route::get('/rekrutmen', [PageController::class, 'recruitments'])->name('recruitments');
 Route::get('/artikel', [PageController::class, 'articles'])->name('articles');
-Route::get('/artikel/{id}', [PageController::class, 'articleDetail'])->name('articles.show');
+Route::get('/artikel/{slug}', [PageController::class, 'articleDetail'])->name('articles.show');
 Route::get('/agenda', [PageController::class, 'agendas'])->name('agendas.index');
 
 Route::get('/pengusaha', [\App\Http\Controllers\EntrepreneurController::class, 'index'])->name('pengusaha.index');

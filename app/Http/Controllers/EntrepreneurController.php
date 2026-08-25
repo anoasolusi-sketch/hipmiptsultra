@@ -30,6 +30,7 @@ class EntrepreneurController extends Controller
             'business_name' => 'required|string|max:255',
             'business_sector' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
+            'website_link' => 'nullable|url|max:255',
             'description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
         ], [

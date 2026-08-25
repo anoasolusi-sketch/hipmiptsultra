@@ -67,6 +67,12 @@
                 </div>
 
                 <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="website_link">Link Website (Opsional)</label>
+                    <input class="shadow appearance-none border @error('website_link') border-red-500 @enderror rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-hipmiBlue" id="website_link" name="website_link" type="url" value="{{ old('website_link') }}" placeholder="Contoh: https://anoadev.id">
+                    @error('website_link') <p class="text-red-500 text-xs italic mt-1">{{ $message }}</p> @enderror
+                </div>
+
+                <div class="mb-6">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="description">Deskripsi Usaha / Bisnis (Opsional)</label>
                     <textarea class="shadow appearance-none border @error('description') border-red-500 @enderror rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-hipmiBlue" id="description" name="description" rows="3" placeholder="Ceritakan singkat tentang usaha Anda">{{ old('description') }}</textarea>
                     @error('description') <p class="text-red-500 text-xs italic mt-1">{{ $message }}</p> @enderror

@@ -19,5 +19,6 @@ class Entrepreneur extends Model
         'status',
         'is_starred',
         'description',
+        'website_link',
     ];
 }

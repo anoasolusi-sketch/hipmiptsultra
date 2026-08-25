@@ -35,6 +35,10 @@ class EntrepreneurForm
                     ->required(),
                 Textarea::make('description')
                     ->columnSpanFull(),
+                TextInput::make('website_link')
+                    ->label('Link Website (Opsional)')
+                    ->url()
+                    ->columnSpanFull(),
                 Toggle::make('is_starred')
                     ->label('Jadikan Unggulan (Bintang)'),
             ]);
